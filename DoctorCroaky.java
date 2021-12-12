@@ -1,6 +1,15 @@
 package com.company;
 
+import java.util.ArrayList;
+
+//Структурирование, шаблон фасад
 public class DoctorCroaky {
+    public static void main(String[] args) {
+        Story story = new Story();
+        story.tellFirstStory();
+        // story.tellSecondStory();
+
+    }
 
 }
 
@@ -40,21 +49,23 @@ interface Animal {
     public void come();
 }
 
-class Fox implements Animal{
+class Fox implements Animal {
 
     @Override
     public void come() {
         System.out.println("The fox came!");
     }
-    public void ask(){
+
+    public void ask() {
         System.out.println("Fox: If you can cure everyone then why haven't you cured your lame legs?");
     }
-    public void answer(){
+
+    public void answer() {
         System.out.println("Fox: Yes, we can be friends.");
     }
 }
 
-class Turtle implements Animal{
+class Turtle implements Animal {
 
     @Override
     public void come() {
@@ -62,10 +73,54 @@ class Turtle implements Animal{
     }
 }
 
-class Rabbit implements Animal{
+class Rabbit implements Animal {
 
     @Override
     public void come() {
         System.out.println("The rabbit came!");
+    }
+}
+
+class Dear implements Animal {
+    public void come() {
+        System.out.println("The dear came");
+    }
+}
+
+class Tortoise implements Animal {
+    public void come() {
+        System.out.println("The tortoise came");
+    }
+}
+
+class Story {
+    private ArrayList<Animal> animals = new ArrayList<>();
+
+    public void tellFirstStory() {
+        Frog frog = new Frog();
+        animals.add(new Dear());  //анонимный объект - anonyme object
+        animals.add(new Tortoise());
+        Animal fox = new Fox();
+        animals.add(fox);
+        frog.went().sayHello();
+        animals.forEach(Animal::come);
+        frog.introduce().advertise();
+        ((Fox) fox).ask();
+        frog.listen();
+
+    }
+
+    public void tellSecondStory() {
+        Frog frog = new Frog();
+        animals.add(new Dear());  //анонимный объект - anonyme object
+        animals.add(new Tortoise());
+        Animal fox = new Fox();
+        animals.add(fox);
+        frog.went().sayHello();
+        animals.forEach(Animal::come);
+        frog.askToBeFriend();
+        ((Fox) fox).ask();
+        frog.listen();
+
     }
 }
